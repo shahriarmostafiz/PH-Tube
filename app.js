@@ -5,7 +5,7 @@ const loadCategory = async () => {
   const data = await response.json();
   result = data.data;
   //   console.log(result);
-  handleCategory(result, sort);
+  handleCategory(result);
 };
 const handleCategory = (data) => {
   const parentTab = document.getElementById("parentTab");
@@ -65,10 +65,10 @@ const handleCards = async (data) => {
         card.authors[0].verified = "";
       }
       cardDiv.innerHTML = `
-    <div class=" card card-compact w-96 h-[450px] bg-base-100 shadow-xl">
-      <div class="relative h-48 border-2 ">
-   <div class= " w-full h-full">
-     <img class="w-full h-full object-cover "  src="${card?.thumbnail}" />
+    <div class=" card card-compact w-96 h-[350px] bg-base-100 shadow-xl">
+      <div class="relative h-48">
+   <div class= "w-full h-full">
+     <img class="w-full h-full object-cover rounded-t-lg"  src="${card?.thumbnail}" />
    </div>;
      <div class="absolute  bottom-0 right-0  flex   items-center justify-center">
        <p class="text-gray-200 text-xs  p-4">${card?.others?.posted_date}</p>
@@ -76,9 +76,9 @@ const handleCards = async (data) => {
    </div>;
 
   <div class="card-body">
-    <div class="flex gap-2  justify-center">
+    <div class="flex gap-2 items-center justify-center">
     <div class="avatar">
-  <div class="w-[70px] h-[70px] rounded-full">
+  <div class="w-[60px] h-[60px] rounded-full">
     <img src=${card?.authors[0]?.profile_picture} alt="not found"/>
   </div>
 </div>
@@ -106,9 +106,7 @@ const handleCards = async (data) => {
 };
 loadCategory();
 handleCards("1000");
-// function sortByViews() {
-//   loadCategory(true);
-// }
+function sortByViews() {}
 const blog = document.getElementById("blog");
 blog.addEventListener("click", () => {
   window.location.href = "blog.html";

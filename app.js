@@ -74,7 +74,7 @@ const handleCards = async (data) => {
      <img class="w-full h-full object-cover rounded-t-lg"  src="${
        card?.thumbnail
      }" />
-   </div>;
+   </div>
      <div class="absolute  bottom-3 right-3  flex   items-center justify-center">
        <p class="text-white text-lg ${
          card?.others?.posted_date
@@ -82,8 +82,7 @@ const handleCards = async (data) => {
            : ""
        }">${card?.others?.posted_date}</p>
      </div>
-   </div>;
-
+   </div>
   <div class="card-body">
     <div class="flex gap-2 items-center justify-center">
     <div class="avatar">

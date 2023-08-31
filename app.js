@@ -49,12 +49,14 @@ const handleCards = async (data) => {
         const hour = parseInt(card.others.posted_date / 3600);
         const step1 = card.others.posted_date / 3600 - hour;
         const minute = parseInt(step1 * 60);
-        const time = ` ${hour} h ${minute} m ago `;
+        const time = ` ${hour}h ${minute}m ago `;
         //   const currentTime = new Date();
         //   const currentHour = currentTime.getHours();
         //   const currentMinutes = currentTime.getMinutes();
 
         card.others.posted_date = time;
+      } else {
+        card.others.posted_date = "";
       }
 
       const url = "./fi_10629607.svg";
@@ -64,14 +66,21 @@ const handleCards = async (data) => {
       } else {
         card.authors[0].verified = "";
       }
+
       cardDiv.innerHTML = `
     <div class=" card card-compact w-96 h-[350px] bg-base-100 shadow-xl">
       <div class="relative h-48">
    <div class= "w-full h-full">
-     <img class="w-full h-full object-cover rounded-t-lg"  src="${card?.thumbnail}" />
+     <img class="w-full h-full object-cover rounded-t-lg"  src="${
+       card?.thumbnail
+     }" />
    </div>;
-     <div class="absolute  bottom-0 right-0  flex   items-center justify-center">
-       <p class="text-gray-200 text-xs  p-4">${card?.others?.posted_date}</p>
+     <div class="absolute  bottom-3 right-3  flex   items-center justify-center">
+       <p class="text-white text-lg ${
+         card?.others?.posted_date
+           ? "bg-black bg-opacity-60 rounded-lg p-1 px-2"
+           : ""
+       }">${card?.others?.posted_date}</p>
      </div>
    </div>;
 
@@ -86,10 +95,14 @@ const handleCards = async (data) => {
       <div class="w-full ">
         <h1 class="text-2xl font-medium">${card.title}</h1>
         <div class="flex gap-2 items-center">
-          <p class="text-gray-500  max-w-fit text-lg ">${card?.authors[0]?.profile_name}</p>
+          <p class="text-gray-500  max-w-fit text-lg ">${
+            card?.authors[0]?.profile_name
+          }</p>
           <img src = '${card?.authors[0]?.verified}' >
         </div>
-        <p class="text-gray-500  max-w-fit text-lg ">${card?.others?.views} views</p>
+        <p class="text-gray-500  max-w-fit text-lg ">${
+          card?.others?.views
+        } views</p>
       </div>
     </div>
 

@@ -5,7 +5,7 @@ const loadCategory = async () => {
   );
   const data = await response.json();
   let result = data.data;
-  // console.log(result);
+
   handleCategory(result);
 };
 const handleCategory = (data) => {
@@ -22,12 +22,7 @@ const handleCards = async (data) => {
     `https://openapi.programming-hero.com/api/videos/category/${data}`
   );
   const output = await response.json();
-  //   console.log(output);
   let result = output?.data;
-  document.getElementById("sort-button").addEventListener("click", () => {
-    sort = true;
-    handleCards("1000");
-  });
   if (sort) {
     result = result.sort((a, b) => {
       let v1 = a.others?.views;
@@ -121,6 +116,7 @@ loadCategory();
 handleCards("1000");
 const handleSort = () => {
   sort = true;
+  handleCards("1000");
 };
 const blog = document.getElementById("blog");
 blog.addEventListener("click", () => {

@@ -13,7 +13,7 @@ const handleCategory = (data) => {
   parentTab.textContent = "";
   data.forEach((element) => {
     const div = document.createElement("div");
-    div.innerHTML = `<button onclick="handleCards('${element.category_id}')" class="tab btn bg-gray-300 text-gray-500 hover:bg-red-500 border hover:text-white px-8 ">${element.category}</button>`;
+    div.innerHTML = `<button onclick="handleCards('${element.category_id}')"  class="tab btn bg-gray-300 text-gray-500 hover:bg-red-500 border hover:text-white px-8 ">${element.category}</button>`;
     parentTab.appendChild(div);
   });
 };
@@ -119,6 +119,9 @@ const handleCards = async (data) => {
 };
 loadCategory();
 handleCards("1000");
+const handleSort = () => {
+  sort = true;
+};
 const blog = document.getElementById("blog");
 blog.addEventListener("click", () => {
   window.location.href = "blog.html";

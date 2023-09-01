@@ -4,13 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <h1>Discuss the scope of "var", "let", and "const"</h1>
-    <p>1</p>
-    <h1>Tell us the use cases of "null" and "undefined"</h1>
-    <p>2</p>
-    <h3>What do you mean by REST API?</h3>
-    <p>3</p>
+    <div class="px-4 my-5 space-y-2">
+      <h1 class="text-3xl font-medium">
+        Discuss the scope of "var", "let", and "const"
+      </h1>
+      <p class="text-base">
+        In JavaScript var, let and const keywords are used for variable
+        declarations. But they are all not similar in nature. Here is a brief
+        discussion about the scopes of var, let and const:
+      </p>
+      <ul class="list-disc text-base px-4 space-y-2">
+        <li>
+          <span class="text-xl font-semibold">var</span>: var has mainly two
+          scopes. Its either function scoped or global scoped.By being function
+          scoped it means that the variable defined by var is accessible within
+          the function it's defined in. By being global scoped it means that
+          variable defined by var are accessible outside of any code block (such
+          as if statements or loops) in which they are defined.
+        </li>
+        <li>
+          <span class="text-xl font-semibold">let</span>: Variables declared
+          with "let" are block-scoped, meaning they are limited in scope to the
+          block (curly braces) in which they are declared. This includes loops,
+          conditional statements, and functions.
+        </li>
+        <li>
+          const: Variables declared with "const" are also block scoped meaning
+          they are only accessible within the block in which they are declared.
+        </li>
+      </ul>
+    </div>
+    <div class="px-4 space-y-2">
+      <h1 class="text-3xl font-medium">
+        Tell us the use cases of "null" and "undefined"
+      </h1>
+      <p>
+        In JavaScript "null" and "undefined" are both special values in
+        JavaScript that represent the absence of a value. However, they are used
+        in slightly different contexts and have specific use cases. Following is
+        their use cases:
+      </p>
+      <ul class="list-decimal text-base px-4 space-y-2">
+        <li>
+          <span class="text-xl font-semibold">undefined</span>: "undefined" is
+          used for:
+          <ul class="list-disc text-base px-4">
+            <li>Checking if a variable is initialized or assigned.</li>
+            <li>Detecting missing function arguments.</li>
+            <li>Identifying missing properties in objects."</li>
+          </ul>
+        </li>
+        <li>
+          <span class="text-xl font-semibold">null</span>: "null" is used for:
+          <ul class="list-disc text-base px-4">
+            <li>
+              Explicitly indicating the absence of a value in a variable or
+              object property.
+            </li>
+            <li>
+              Clearing out the value of a variable while still indicating its
+              intentional emptiness.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="px-4 mt-5 space-y-2">
+      <h1 class="text-3xl font-medium">What do you mean by REST API?</h1>
+      <p>
+        REST API, or Representational State Transfer Application Programming
+        Interface, is an architectural style and set of constraints used for
+        designing web services that allow different software applications to
+        communicate and exchange data over the internet.The API follows certain
+        rules that make it easy for the programs to understand each other. It
+        uses web addresses to identify what data or action is needed, and it
+        uses simple commands like "get," "create," "update," and "delete" to do
+        different things. This helps different programs work together smoothly
+        and share data effectively.
+      </p>
+    </div>
+    <p></p>
   </body>
 </html>

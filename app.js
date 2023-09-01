@@ -1,14 +1,16 @@
+let sort = false;
 const loadCategory = async () => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/categories`
   );
   const data = await response.json();
-  result = data.data;
-  //   console.log(result);
+  let result = data.data;
+  // console.log(result);
   handleCategory(result);
 };
 const handleCategory = (data) => {
   const parentTab = document.getElementById("parentTab");
+  parentTab.textContent = "";
   data.forEach((element) => {
     const div = document.createElement("div");
     div.innerHTML = `<button onclick="handleCards('${element.category_id}')" class="tab btn bg-gray-300 text-gray-500 hover:bg-red-500 border hover:text-white px-8 ">${element.category}</button>`;
@@ -22,7 +24,19 @@ const handleCards = async (data) => {
   const output = await response.json();
   //   console.log(output);
   let result = output?.data;
-
+  document.getElementById("sort-button").addEventListener("click", () => {
+    sort = true;
+    handleCards("1000");
+  });
+  if (sort) {
+    result = result.sort((a, b) => {
+      let v1 = a.others?.views;
+      let v2 = b.others?.views;
+      let value1 = parseInt(v1);
+      let value2 = parseInt(v2);
+      return value2 - value1;
+    });
+  }
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   if (result.length === 0) {
@@ -33,11 +47,9 @@ const handleCards = async (data) => {
       "md:col-span-2",
       "justify-center"
     );
-    // .classList.add("w-full", "block", "border", "border-cyan-950 ");
-    undefinedDiv.innerHTML = `<div class="w-full     h-screen flex flex-col gap-4 justify-center items-center ">
+    undefinedDiv.innerHTML = `<div class="w-full  h-screen flex flex-col gap-4 justify-center items-center ">
     <img src="./Icon.png" alt="" />
-    <p class= "text-3xl font-medium">No Data Available</p></div>`;
-
+    <p class= "text-3xl font-medium text-center">Ooops!!! Sorry, There is no <br >content here </p></div>`;
     cardContainer.appendChild(undefinedDiv);
   } else {
     result.forEach((card) => {
@@ -50,23 +62,16 @@ const handleCards = async (data) => {
         const step1 = card.others.posted_date / 3600 - hour;
         const minute = parseInt(step1 * 60);
         const time = ` ${hour}h ${minute}m ago `;
-        //   const currentTime = new Date();
-        //   const currentHour = currentTime.getHours();
-        //   const currentMinutes = currentTime.getMinutes();
-
         card.others.posted_date = time;
       } else {
         card.others.posted_date = "";
       }
-
       const url = "./fi_10629607.svg";
-
       if (card?.authors[0]?.verified) {
         card.authors[0].verified = url;
       } else {
         card.authors[0].verified = "";
       }
-
       cardDiv.innerHTML = `
     <div class=" card card-compact w-96 h-[350px] bg-base-100 shadow-xl">
       <div class="relative h-48">
@@ -104,8 +109,6 @@ const handleCards = async (data) => {
         } views</p>
       </div>
     </div>
-
-     
     </div>
   </div>
 </div>
@@ -113,12 +116,9 @@ const handleCards = async (data) => {
       cardContainer.appendChild(cardDiv);
     });
   }
-
-  //   console.log(result);
 };
 loadCategory();
 handleCards("1000");
-function sortByViews() {}
 const blog = document.getElementById("blog");
 blog.addEventListener("click", () => {
   window.location.href = "blog.html";

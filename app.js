@@ -1,4 +1,3 @@
-let sort = false;
 const loadCategory = async () => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/categories`
@@ -17,12 +16,14 @@ const handleCategory = (data) => {
     parentTab.appendChild(div);
   });
 };
-const handleCards = async (data) => {
+const handleCards = async (data, sort = false) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${data}`
   );
   const output = await response.json();
   let result = output?.data;
+  const sortingButton = document.getElementById("sort-button");
+  sortingButton.setAttribute("onclick", `handleCards(${data}, true)`);
   if (sort) {
     result = result.sort((a, b) => {
       let v1 = a.others?.views;
@@ -37,10 +38,11 @@ const handleCards = async (data) => {
   if (result.length === 0) {
     const undefinedDiv = document.createElement("div");
     undefinedDiv.classList.add(
-      "flex",
       "lg:col-span-4",
       "md:col-span-2",
-      "justify-center"
+      "col-span-1",
+      "justify-center",
+      "items-center"
     );
     undefinedDiv.innerHTML = `<div class="w-full  h-screen flex flex-col gap-4 justify-center items-center ">
     <img src="./Icon.png" alt="" />
@@ -84,14 +86,14 @@ const handleCards = async (data) => {
      </div>
    </div>
   <div class="card-body">
-    <div class="flex gap-2 items-center justify-center">
-    <div class="avatar">
+    <div class="flex gap-2  justify-center">
+    <div class="avatar mt-2">
   <div class="w-[60px] h-[60px] rounded-full">
     <img src=${card?.authors[0]?.profile_picture} alt="not found"/>
   </div>
 </div>
      
-      <div class="w-full ">
+      <div class="w-full">
         <h1 class="text-2xl font-medium">${card.title}</h1>
         <div class="flex gap-2 items-center">
           <p class="text-gray-500  max-w-fit text-lg ">${
@@ -114,10 +116,6 @@ const handleCards = async (data) => {
 };
 loadCategory();
 handleCards("1000");
-const handleSort = () => {
-  sort = true;
-  handleCards("1000");
-};
 const blog = document.getElementById("blog");
 blog.addEventListener("click", () => {
   window.location.href = "blog.html";
